@@ -44,4 +44,14 @@ class JobSchedules extends Authenticatable
     {
         return $this->hasMany(JobScheduleDomains::class, 'job_schedule_id', 'id');
     }
+
+    public function mapHeaderDetails()
+    {
+        return $this->hasOne(MapHeaderDetails::class, 'map_id', 'id');
+    }
+
+    public function mapIpDetails()
+    {
+        return $this->hasMany(MapIpDetails::class, 'map_id', 'id');
+    }
 }

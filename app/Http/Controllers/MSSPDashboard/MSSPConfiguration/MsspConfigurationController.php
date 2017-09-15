@@ -115,11 +115,75 @@
                                                                  'domain'    => $domains
                                                              ]);
 
-                   if($data['status'] == 'success') {
-                        $jobSchedule->map_reference   = $data['data']['MAP']['@attributes']['value'];
-                        $jobSchedule->launch_date = $data['data']['MAP']['HEADER']['KEY'][2];
-                        $jobSchedule->status      = $data['data']['MAP']['HEADER']['KEY'][9];
-                        $jobSchedule->save();
+                    if($data['status'] == 'success') {
+                        if(isset($data['data']) && isset($data['data']['MAP']) && isset($data['data']['MAP']['@attributes'])) {
+                            $jobSchedule->map_reference = $data['data']['MAP']['@attributes']['value'];
+                            $jobSchedule->launch_date   = $data['data']['MAP']['HEADER']['KEY'][2];
+                            $jobSchedule->status        = $data['data']['MAP']['HEADER']['KEY'][9];
+                            $jobSchedule->save();
+
+                            $mapHeaderDetails = $jobSchedule->mapHeaderDetails()->create([
+                                                                                             'user_name'        => $data['data']['MAP']['HEADER']['KEY'][0],
+                                                                                             'company'          => $data['data']['MAP']['HEADER']['KEY'][1],
+                                                                                             'map_display_date' => $data['data']['MAP']['HEADER']['KEY'][2],
+                                                                                            // 'map_date'         => $data['data']['MAP']['HEADER']['KEY'][2],
+                                                                                             'title'            => $data['data']['MAP']['HEADER']['KEY'][3],
+                                                                                             'target'           => $data['data']['MAP']['HEADER']['KEY'][5],
+                                                                                             'nbhost_total'     => $data['data']['MAP']['HEADER']['KEY'][5],
+                                                                                            // 'duration'         => $data['data']['MAP']['HEADER']['KEY'][6],
+                                                                                             'scan_host'        => $data['data']['MAP']['HEADER']['KEY'][7],
+                                                                                             'report_type'      => $data['data']['MAP']['HEADER']['KEY'][9],
+                                                                                             'map_status'       => $data['data']['MAP']['HEADER']['KEY'][9],
+                                                                                             'map_options'      => $data['data']['MAP']['HEADER']['KEY'][10]
+                                                                                         ]);
+
+                            if(isset($data['data']['MAP']['IP'])) {
+                                foreach($data['data']['MAP']['IP'] as $ipDetails) {
+
+                                    $discoveryMethods = [];
+                                    if(isset($ipDetails['DISCOVERY'])){
+                                        foreach($ipDetails['DISCOVERY'] as $discoveryMethodDetails){
+                                            if(isset($discoveryMethodDetails['@attributes'])){
+                                                $discoveryMethods[] = $discoveryMethodDetails['@attributes']['method'];
+                                            }
+                                        }
+                                    }
+
+                                    $portLists        = [];
+                                    if(isset($ipDetails['PORT'])){
+                                        foreach($ipDetails['PORT'] as $portValueDetails){
+                                            if(isset($portValueDetails['@attributes'])){
+                                                $portLists[] = $portValueDetails['@attributes']['value'];
+                                            }
+                                        }
+                                    }
+
+                                    $linkValues       = [];
+                                    if(isset($ipDetails['LINK'])){
+                                        foreach($ipDetails['LINK'] as $linkValueDetails){
+                                            if(isset($linkValueDetails['@attributes'])){
+                                                $linkValues[] = $linkValueDetails['@attributes']['value'];
+                                            }
+                                        }
+                                    }
+
+                                    $jobSchedule->mapIpDetails()->create([
+                                                                             'map_header_detail_id'  => $mapHeaderDetails->id,
+                                                                             'ip_address'            => isset($ipDetails['@attributes']['value']) ? $ipDetails['@attributes']['value'] : null,
+                                                                             'ip_name'               => isset($ipDetails['@attributes']['name']) ? $ipDetails['@attributes']['name'] : null,
+                                                                             'ip_type'               => isset($ipDetails['@attributes']['type']) ? $ipDetails['@attributes']['type'] : null,
+                                                                             'ip_os'                 => isset($ipDetails['@attributes']['os']) ? $ipDetails['@attributes']['os'] : null,
+                                                                             'ip_account'            => isset($ipDetails['@attributes']['account']) ? $ipDetails['@attributes']['account'] : null,
+                                                                             'ip_netbios'            => isset($ipDetails['@attributes']['netbios']) ? $ipDetails['@attributes']['netbios'] : null,
+                                                                             'discovery_method_list' => (count($discoveryMethods) > 0) ? implode(',', $discoveryMethods) : null,
+                                                                             'port_list'             => (count($portLists) > 0) ? implode(',', $portLists) : null,
+                                                                             'link_value'            => (count($linkValues) > 0) ? implode(',', $linkValues) : null
+                                                                         ]);
+                                }
+                            }
+
+
+                        }
                     }
 
                     $return = [

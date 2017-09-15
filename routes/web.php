@@ -11,11 +11,9 @@
 |
 */
 
-    Route::get('/', function() {
-        return view('welcome');
-    });
+    Route::get('/', 'Auth\LoginController@showLoginForm');
     Auth::routes();
-    Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'DashboardController@index');
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::get('/dashboard', 'DashboardController@index');
 
@@ -38,7 +36,7 @@
         });
 
         Route::group(['prefix' => 'mssp-dashboard', 'namespace' => 'MSSPDashboard'], function() {
-            Route::get('/mssp-configuration', 'MSSPDashboardController@msspConfiguration');
+            Route::get('/mssp-configuration', 'MsspDashboardController@msspConfiguration');
             Route::group(['prefix' => 'mssp-configuration', 'namespace' => 'MSSPConfiguration'], function() {
                 Route::get('/domains', 'MsspConfigurationController@domains');
                 Route::post('/add-domain', 'MsspConfigurationController@addDomain');
@@ -55,8 +53,10 @@
         $qualys = App::make('\App\Adapters\Qualys');
         $params = [];
         $params['map_title'] = 'dotbits.com from API - 2';
-        $params['domain'] = 'dotbits.com';
+        $params['domain'] = 'fastraxpos.com';
         $params['save_report'] = 'yes';
 
-        $qualys->get('msp/map-2.php', $params, 'v1');
+        $data = $qualys->get('msp/map-2.php', $params, 'v1');
+
+        dd($data);
     });
