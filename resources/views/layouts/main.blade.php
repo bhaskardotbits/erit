@@ -126,6 +126,8 @@
 
     <div class="container-fluid">
 
+    @include('layouts.partials.error')
+
 
     @yield('content')
     <!-- Container Fluid close -->

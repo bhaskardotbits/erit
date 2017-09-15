@@ -4,7 +4,7 @@
         <div class="heading-actions">
             <div class="wrapper heading-wrapper">
                 <h1 class="pull-left"><a href="{{ url('/dashboard') }}" class="btn btn-default btn-circle"><i
-                                class="fa fa-home"></i></a> Admin Module</h1>
+                                class="fa fa-home"></i></a> My Profile</h1>
                 <div class="pull-right">
                     <ol class="breadcrumb mb-0">
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>

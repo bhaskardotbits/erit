@@ -48,7 +48,7 @@ class AdminModuleController extends AdminBaseController
 
             User::where('id', '=', $user->id)->update($post_data);
             return redirect('admin-profile')
-                ->with('message', 'Profile updated successfully!');
+                ->with('success', 'Profile updated successfully!');
         }
         $businessUnits = [];
         $roles = Role::all(); //dd($roles);
@@ -68,11 +68,11 @@ class AdminModuleController extends AdminBaseController
             $user = User::find(auth()->user()->id);
 
             if (!Hash::check($data['old_password'], $user->password)) {
-                return back()->with('error', 'The specified password does not match the database password');
+                return back()->with('error', 'Old password id incorrect.');
             } else {
                 $data['password'] = Hash::make($data['new_password']);
                 $user->update($data);
-                return redirect('admin-profile')->with('message', 'Password changed successfully!');
+                return redirect('admin-profile')->with('success', 'Password changed successfully!');
             }
         }
         $this->layout->content = view('admin-module.change-password');
