@@ -43,6 +43,8 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li><h3 style="font-size: 1.2em; margin-top: 15px;">{{ Auth::user()->account->company_name }}<br/><small>Expires on 9/15/2018</small></h3></li>
+
                 <li class="dropdown msgqueriestp"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                                      role="button" aria-haspopup="true" aria-expanded="false"><i
                                 class="fa fa-envelope"></i></a>
