@@ -116,13 +116,13 @@
 
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="form-group{{ $errors->has('no_of_asstes') ? ' has-error' : '' }}">
-                                                            <label class="control-label">No Of Asstes</label>
+                                                            <label class="control-label">No Of Assets</label>
                                                             <input id="no_of_asstes" type="text" class="form-control"
-                                                                   name="no_of_asstes" placeholder="Company Size"
+                                                                   name="no_of_asstes" placeholder="No Of Assets"
                                                                    value="{{ old('no_of_asstes') }}" required>
                                                             @if ($errors->has('no_of_asstes'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('No Of Asstes') }}</strong>
+                                                                    <strong>{{ $errors->first('no_of_asstes') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>

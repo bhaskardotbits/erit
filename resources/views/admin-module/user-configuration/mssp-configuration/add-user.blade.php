@@ -341,20 +341,9 @@
 
 
 
-
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                        <div class="form-group{{ $errors->has('dashboard_page') ? ' has-error' : '' }}">
-                                                            <label class="control-label">Dashboard Page</label>
-                                                            <input id="dashboard_page" type="text" class="form-control"
+                                                            <input id="dashboard_page" type="hidden" class="form-control"
                                                                    name="dashboard_page" placeholder="Dashboard Page"
-                                                                   value="{{ old('dashboard_page') }}">
-                                                            @if ($errors->has('dashboard_page'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('dashboard_page') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
+                                                                   value="">
 
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="form-group{{ $errors->has('business_justification') ? ' has-error' : '' }}">
@@ -422,7 +411,7 @@
                                                         <div class="form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
                                                             <label class="control-label">Access Start Date</label>
                                                             <input id="start_date" type="text" class="form-control"
-                                                                   name="start_date" placeholder="Access Start Date"
+                                                                   name="start_date" placeholder="YYYY-MM-DD"
                                                                    value="{{ old('start_date') }}" required>
                                                             @if ($errors->has('start_date'))
                                                                 <span class="help-block">
@@ -436,7 +425,7 @@
                                                         <div class="form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
                                                             <label class="control-label">Access End Date</label>
                                                             <input id="end_date" type="text" class="form-control"
-                                                                   name="end_date" placeholder="Access End Date"
+                                                                   name="end_date" placeholder="YYYY-MM-DD"
                                                                    value="{{ old('end_date') }}">
                                                             @if ($errors->has('end_date'))
                                                                 <span class="help-block">

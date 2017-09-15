@@ -39,7 +39,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <a class="navbar-brand" href="dashboard.php"><img src="{{ url('/images/logo.png') }}"/></a></div>
+            <a class="navbar-brand" href="{{ url('/dashboard') }}"><img src="{{ url('/images/logo.png') }}"/></a></div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -112,7 +112,7 @@
                                                             class="img-responsive"/></span> </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/admin-profile') }}"><i class="fa fa-user"></i> Profile </a></li>
-                        <li><a href="#"><i class="fa fa-calendar"></i> Calender <?php echo date("M d"); ?> </a></li>
+                        <li><a href="#"><i class="fa fa-calendar"></i> Calendar <?php echo date("M d"); ?> </a></li>
                         <li><a href="#"><i class="fa fa-comments"></i> Messages 10 </a></li>
                         <li><a href="#"><i class="fa fa-check-circle"></i> Status </a></li>
                         <li><a href="{{ url('/logout') }}"><i class="fa fa-power-off"></i> Log Out</a></li>

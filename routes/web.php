@@ -49,7 +49,7 @@
                 Route::post('/add-domain-scan-launch', 'MsspConfigurationController@ajaxDomainScanLaunch');
             });
 
-            Route::get('/mssp-services', 'MSSPDashboardController@msspServices');
+            Route::get('/mssp-services', 'MsspDashboardController@msspServices');
             Route::group(['prefix' => 'mssp-services', 'namespace' => 'MSSPServices'], function() {
                 Route::get('/professional-services', 'MsspServicesController@professionalServices');
                 Route::get('/reporting-services', 'MsspServicesController@reportingServices');
