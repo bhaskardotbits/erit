@@ -21,6 +21,9 @@
 
     Route::group(['middleware' => 'auth'], function() {
 
+        Route::match(['get', 'post'], 'admin-profile', 'AdminModule\AdminModuleController@profile');
+        Route::match(['get', 'post'], 'admin-change-password', 'AdminModule\AdminModuleController@updatePassword');
+
         Route::group(['prefix' => 'admin-module', 'namespace' => 'AdminModule'], function() {
             Route::get('/', 'AdminModuleController@index');
             Route::get('user-configuration', 'AdminModuleController@userConfiguration');
@@ -34,6 +37,7 @@
                     Route::match(['get', 'post'], 'add-user', 'MsspConfigurationController@addUser');
 
                 });
+
             });
         });
 
@@ -46,6 +50,19 @@
                 Route::post('/domain-scan-launch', 'MsspConfigurationController@domainScanLaunch');
                 Route::post('/add-domain-scan-launch', 'MsspConfigurationController@ajaxDomainScanLaunch');
             });
+
+            Route::get('/mssp-services', 'MSSPDashboardController@msspServices');
+            Route::group(['prefix' => 'mssp-services', 'namespace' => 'MSSPServices'], function() {
+                Route::get('/professional-services', 'MSSPServicesController@professionalServices');
+                Route::get('/reporting-services', 'MSSPServicesController@reportingServices');
+                Route::group(['prefix' => 'reporting-services', 'namespace' => 'ReportingServices'], function() {
+                    Route::match(['get', 'post'], 'vulnerability-scan-reports', 'ReportingServicesController@vulnerabilityScanReports');
+
+                });
+
+            });
+
+
         });
 
     });
