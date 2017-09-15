@@ -109,7 +109,7 @@
                                 class="userprofilepic"><img.  src="{{ url('/images/profilepic_img.png') }}"
                                                             class="img-responsive"/></span> </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> Profile </a></li>
+                        <li><a href="{{ url('/admin-profile') }}"><i class="fa fa-user"></i> Profile </a></li>
                         <li><a href="#"><i class="fa fa-calendar"></i> Calender <?php echo date("M d"); ?> </a></li>
                         <li><a href="#"><i class="fa fa-comments"></i> Messages 10 </a></li>
                         <li><a href="#"><i class="fa fa-check-circle"></i> Status </a></li>

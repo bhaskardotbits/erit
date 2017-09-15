@@ -17,4 +17,10 @@ class MsspDashboardController extends Controller
         $data['user']    = Auth::user();
         return view('mssp-dashboard/mssp-configuration', $data);
     }
+
+    public function msspServices()
+    {
+        $data['user']    = Auth::user();
+        return view('mssp-dashboard/mssp-services', $data);
+    }
 }

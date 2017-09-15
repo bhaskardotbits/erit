@@ -5,6 +5,9 @@ namespace App\Http\Controllers\AdminModule;
 use App\AccountModules;
 use App\Module;
 use App\User;
+use App\Role;
+use Auth;
+use Hash;
 use App\Account;
 use App\ApiUsers;
 use App\Mail\UserCreated;
@@ -35,6 +38,46 @@ class AdminModuleController extends AdminBaseController
 
         $this->layout->content = view('admin-module.account-settings', $data);
     }
+
+
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+        if($request->method() == 'POST'){
+            $post_data = $request->except('_token');
+
+            User::where('id', '=', $user->id)->update($post_data);
+            return redirect('admin-profile')
+                ->with('message', 'Profile updated successfully!');
+        }
+        $businessUnits = [];
+        $roles = Role::all(); //dd($roles);
+        $this->layout->content = view('admin-module.profile', compact('user','businessUnits','roles'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        if($request->method() == 'POST') {
+            $this->validate($request, [
+                'old_password' => 'required',
+                'new_password' => 'required|min:6',
+                'confirm_password' => 'required|same:new_password',
+            ]);
+            $data = $request->all();
+
+            $user = User::find(auth()->user()->id);
+
+            if (!Hash::check($data['old_password'], $user->password)) {
+                return back()->with('error', 'The specified password does not match the database password');
+            } else {
+                $data['password'] = Hash::make($data['new_password']);
+                $user->update($data);
+                return redirect('admin-profile')->with('message', 'Password changed successfully!');
+            }
+        }
+        $this->layout->content = view('admin-module.change-password');
+    }
+
 
     public function addAccount(Request $request)
     {
