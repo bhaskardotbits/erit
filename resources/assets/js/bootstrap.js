@@ -10,7 +10,12 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
-require('easy-autocomplete')
+require('easy-autocomplete');
+
+window.Highcharts = require('highcharts');
+require('highcharts/modules/drilldown')(window.Highcharts);
+require('highcharts/modules/funnel')(window.Highcharts);
+require('highcharts/modules/map')(window.Highcharts);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
