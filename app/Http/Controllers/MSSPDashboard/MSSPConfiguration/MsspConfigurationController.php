@@ -117,7 +117,7 @@
                                                                  'domain'    => $domains
                                                              ]);
 
-                    dd($data);
+                    //dd($data);
 
                     if($data['status'] == 'success') {
                         if(isset($data['data']) && isset($data['data']['MAP']) && isset($data['data']['MAP']['@attributes'])) {

@@ -74,8 +74,6 @@ class Qualys
 
             $array = json_decode(json_encode($xml), true);
 
-            dd($array);
-
             return [
                 'status'  => 'success',
                 'data'    => $array,
