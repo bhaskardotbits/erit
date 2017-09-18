@@ -55,7 +55,7 @@
                 Route::get('/reporting-services', 'MsspServicesController@reportingServices');
                 Route::group(['prefix' => 'reporting-services', 'namespace' => 'ReportingServices'], function() {
                     Route::match(['get', 'post'], 'vulnerability-scan-reports', 'ReportingServicesController@vulnerabilityScanReports');
-
+                    Route::match(['get', 'post'], 'domain-scan-reports', 'ReportingServicesController@domainScanReports');
                 });
 
             });

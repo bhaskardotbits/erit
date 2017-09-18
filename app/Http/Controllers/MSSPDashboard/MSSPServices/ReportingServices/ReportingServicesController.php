@@ -25,4 +25,10 @@ class ReportingServicesController extends AdminBaseController
         $this->layout->content = view('mssp-dashboard/mssp-services/reporting-services/vulnerability-scan-reports', $data);
     }
 
+    public function domainScanReports()
+    {
+        $data['user']    = Auth::user();
+        $this->layout->content = view('mssp-dashboard/mssp-services/reporting-services/domain-scan-reports', $data);
+    }
+
 }
