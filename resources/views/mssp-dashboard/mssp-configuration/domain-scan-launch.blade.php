@@ -395,7 +395,7 @@
                                                             <td><?=$jobSchedule->title;?></td>
                                                             <td>
                                                                 <?php foreach($jobSchedule->jobScheduleDomains as $jobScheduleDomain){ ?>
-                                                                <?=$jobScheduleDomain->domain->domains;?>,
+                                                                <?=$jobScheduleDomain->domain->domains;?>
                                                                 <?php } ?>
                                                             </td>
                                                             <td><?=$jobSchedule->taskOwner->first_name . ' '. $jobSchedule->taskOwner->last_name;?></td>
