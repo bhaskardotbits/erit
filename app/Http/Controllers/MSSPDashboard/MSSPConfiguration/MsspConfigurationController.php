@@ -91,12 +91,12 @@
             if($request->method() == 'GET') {
                 $user = Auth::user();
 
-                dd($request->all());
 
                 $jobSchedule = JobSchedules::where([
                                             'account_id' => $user->account_id,
                                             'id'         => $request->input('id')
                                         ])->first();
+                dd($jobSchedule);
 
                 $return = [
                     'status'      => 'failure',
