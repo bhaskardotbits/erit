@@ -442,8 +442,13 @@
                     $(currentScope).html('Processing...');
                 }
             }).done(function (res) {
-                console.log(res);
-                $(currentScope).html('View reports');
+                if(res.status == 'success'){
+                    $(currentScope).html('View reports');
+                } else {
+                    alert("Error occured during scan. Please try again.")
+                    $(currentScope).html('Start');
+                }
+
             }).fail(function (jqXHR, textStatus) {
                 $(currentScope).html('Start');
             });

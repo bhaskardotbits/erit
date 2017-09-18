@@ -59,7 +59,7 @@ class Qualys
             $url .= '?' . http_build_query($array);
 
 
-            $response = $this->client->request('GET', $url, [
+           $response = $this->client->request('GET', $url, [
                 'headers' => [
                     'X-Requested-With: PHP curl',
                     'Content-Type: text/xml'
