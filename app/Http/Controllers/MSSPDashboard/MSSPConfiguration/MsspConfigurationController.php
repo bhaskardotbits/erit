@@ -88,7 +88,7 @@
             ];
 
 
-            if($request->method() == 'POST') {
+            if($request->method() == 'GET') {
                 $user = Auth::user();
 
                 $jobSchedule = JobSchedules::where([
