@@ -73,8 +73,7 @@ class Qualys
             $result = $result->getContents();
 
             QualysApiCalls::create([
-                                       'account_id' => Auth::user()->account_id,
-                                       'request' => $url,
+                                      'request' => $url,
                                         'response' => $result
                                    ]);
 
