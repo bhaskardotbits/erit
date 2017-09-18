@@ -436,7 +436,7 @@
             var currentScope = this
             $.ajax({
                 url: "{{ url('/mssp-dashboard/mssp-configuration/add-domain-scan-launch') }}",
-                method: "POST",
+                method: "GET",
                 data: {id: $(currentScope).data("id")},
                 beforeSend: function (xhr) {
                     $(currentScope).html('Processing...');

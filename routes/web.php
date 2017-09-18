@@ -46,7 +46,7 @@
                 Route::post('/add-domain', 'MsspConfigurationController@addDomain');
                 Route::get('/domain-scan-launch', 'MsspConfigurationController@domainScanLaunch');
                 Route::post('/domain-scan-launch', 'MsspConfigurationController@domainScanLaunch');
-                Route::post('/add-domain-scan-launch', 'MsspConfigurationController@ajaxDomainScanLaunch');
+                Route::get('/add-domain-scan-launch', 'MsspConfigurationController@ajaxDomainScanLaunch');
             });
 
             Route::get('/mssp-services', 'MsspDashboardController@msspServices');
