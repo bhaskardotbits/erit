@@ -1,8 +1,10 @@
 <?php
 namespace App\Adapters;
 
+use App\QualysApiCalls;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Auth;
 
 class Qualys
 {
@@ -69,6 +71,12 @@ class Qualys
 
             $result = $response->getBody();
             $result = $result->getContents();
+
+            QualysApiCalls::create([
+                                       'account_id' => Auth::user()->account_id,
+                                       'request' => $url,
+                                        'response' => $result
+                                   ]);
 
             $xml   = simplexml_load_string($result, 'SimpleXMLElement', LIBXML_NOCDATA);
 
