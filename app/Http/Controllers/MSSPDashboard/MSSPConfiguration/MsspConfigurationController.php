@@ -188,14 +188,18 @@
 
 
                         }
+
+                        $return = [
+                            'status'      => 'success',
+                            'message'     => 'Domain scan launched successfully.',
+                            'data'        => $data,
+                            'status_code' => 201
+                        ];
+                    } else {
+                        $return = $data;
                     }
 
-                    $return = [
-                        'status'      => 'success',
-                        'message'     => 'Domain scan launched successfully.',
-                        'data'        => $data,
-                        'status_code' => 201
-                    ];
+
                 }
             }
 
