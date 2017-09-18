@@ -96,7 +96,7 @@
                                             'account_id' => $user->account_id,
                                             'id'         => $request->input('id')
                                         ])->first();
-                dd($jobSchedule);
+
 
                 $return = [
                     'status'      => 'failure',
@@ -116,6 +116,8 @@
                                                                  'map_title' => $jobSchedule->title,
                                                                  'domain'    => $domains
                                                              ]);
+
+                    dd($data);
 
                     if($data['status'] == 'success') {
                         if(isset($data['data']) && isset($data['data']['MAP']) && isset($data['data']['MAP']['@attributes'])) {
