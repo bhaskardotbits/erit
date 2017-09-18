@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
                                 <div class="dash_bxblock clr_cyan dashbx_sm">
-                                    <a href="javascript:"><img class="icon" src="{{ url('images/gn_ds_icon.png') }}" />
+                                    <a href="{{ url('/mssp-dashboard/mssp-services/reporting-services/domain-scan-reports') }}"><img class="icon" src="{{ url('images/gn_ds_icon.png') }}" />
                                         <span>Domain Scan reports</span></a>
                                 </div>
                             </div>
