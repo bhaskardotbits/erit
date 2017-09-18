@@ -106,7 +106,7 @@
 
                 if($jobSchedule) {
 
-                    $domains = [];
+                    $domains = '';
 
                     foreach($jobSchedule->jobScheduleDomains as $jobScheduleDomain){
                         $domains = $jobScheduleDomain->domain->domains;
