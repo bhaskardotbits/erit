@@ -82,7 +82,7 @@ class Qualys
                 'message' => 'Successfully launched.'
             ];
 
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
 
             return [
                 'status'  => 'failure',
