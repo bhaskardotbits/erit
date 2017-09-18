@@ -50,6 +50,7 @@ class Qualys
      */
     public function get($uri, $array, $version = 'v1')
     {
+        ini_set('max_execution_time', -1);
         try {
 
             $url = $this->api_v1_url . '/' . $uri;
