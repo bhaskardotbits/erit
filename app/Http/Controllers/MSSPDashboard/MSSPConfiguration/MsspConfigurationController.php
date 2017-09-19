@@ -90,13 +90,29 @@
 
             if($request->method() == 'GET') {
                 $user = Auth::user();
-
-
                 $jobSchedule = JobSchedules::where([
-                                            'account_id' => $user->account_id,
-                                            'id'         => $request->input('id')
-                                        ])->first();
+                                                       'account_id' => $user->account_id,
+                                                       'id'         => $request->input('id')
+                                                   ])->first();
 
+                if($request->input('type') == 'cancel'){
+                    $jobSchedule->map_reference = null;
+                    $jobSchedule->launch_date = null;
+                    $jobSchedule->status = 'CANCELLED';
+                } else {
+                    $jobSchedule->map_reference = null;
+                    $jobSchedule->launch_date = null;
+                    $jobSchedule->status = 'QUEUED';
+                }
+                $jobSchedule->save();
+
+                $return = [
+                    'status'      => 'success',
+                    'data'        => $jobSchedule,
+                    'status_code' => 201
+                ];
+
+            /*
 
                 $return = [
                     'status'      => 'failure',
@@ -201,6 +217,7 @@
 
 
                 }
+            */
             }
 
             return response()->json($return, 201);

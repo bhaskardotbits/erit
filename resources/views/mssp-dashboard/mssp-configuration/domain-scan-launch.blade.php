@@ -403,11 +403,22 @@
                                                             <td><?=$jobSchedule->map_reference;?></td>
                                                             <td><?=$jobSchedule->launch_date;?></td>
                                                             <td><?=$jobSchedule->status;?></td>
-                                                            <td class="text-center"><a href="javascript:vaoid(0);"
-                                                                                       data-id="<?=$jobSchedule->id;?>"
-                                                                                       class="btn btn-warning launch-domain">
-                                                                    <?=($jobSchedule->status == 'FINISHED') ? 'Relaunch' : 'Start';?>
+                                                            <td class="text-center">
+                                                                <?php if($jobSchedule->status == '' || $jobSchedule->status == 'FINISHED'){ ?>
+                                                                <a href="javascript:void(0);"
+                                                                   data-id="<?=$jobSchedule->id;?>"
+                                                                   data-type="launch"
+                                                                   class="btn btn-warning launch-domain">
+                                                                    Start
                                                                 </a>
+                                                                <?php } else if($jobSchedule->status == 'QUEUED'){ ?>
+                                                                    <a href="javascript:void(0);"
+                                                                       data-id="<?=$jobSchedule->id;?>"
+                                                                       data-type="cancel"
+                                                                       class="btn btn-warning launch-domain">
+                                                                        Cancel
+                                                                    </a>
+                                                                <?php } ?>
                                                             </td>
                                                         </tr>
                                                         <?php } ?>
@@ -433,17 +444,39 @@
     <script type="text/javascript">
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}});
         $(document).on('click', '.launch-domain', function () {
-            var currentScope = this
+            var currentScope = this;
+            var type = $(currentScope).data("type")
             $.ajax({
                 url: "{{ url('/mssp-dashboard/mssp-configuration/add-domain-scan-launch') }}",
                 method: "GET",
-                data: {id: $(currentScope).data("id")},
+                data: {id: $(currentScope).data("id"), type: type},
                 beforeSend: function (xhr) {
                     $(currentScope).html('Processing...');
                 }
             }).done(function (res) {
                 if(res.status == 'success'){
-                    $(currentScope).html('View reports');
+                    var trscope = $(currentScope).closest("tr");
+                    $(trscope).find('td:eq(4)').html(res.data.map_reference);
+                    $(trscope).find('td:eq(5)').html(res.data.launch_date);
+                    $(trscope).find('td:eq(6)').html(res.data.status);
+                    if(res.data.status == 'QUEUED'){
+                        html = '<a href="javascript:void(0);"'
+                        + 'data-id="' + res.data.id + '"'
+                        + 'data-type="cancel"'
+                        + 'class="btn btn-warning launch-domain">'
+                        + 'Cancel'
+                        + '</a>'
+                        $(trscope).find('td:eq(7)').html(html);
+                    } else {
+                        html = '<a href="javascript:void(0);"'
+                            + 'data-id="' + res.data.id + '"'
+                            + 'data-type="launch"'
+                            + 'class="btn btn-warning launch-domain">'
+                            + 'Start'
+                            + '</a>'
+                        $(trscope).find('td:eq(7)').html(html);
+                    }
+
                 } else {
                     alert("Error occured during scan. Please try again.")
                     $(currentScope).html('Start');
